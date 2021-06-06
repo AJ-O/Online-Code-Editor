@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle } from 'react';
 import styles from './Editor.module.css';
 import { Controlled as CodeMirror } from 'react-codemirror2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompressAlt, faExpandAlt } from '@fortawesome/free-solid-svg-icons'
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
+import { forwardRef } from 'react/cjs/react.production.min';
 require('codemirror/mode/xml/xml');
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/css/css');
 
 
-export default function Editor({ mode, onCodeUpdate }) {
+const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
 
   const [code, setCode] = useState('');
+  const [isFullScreen, setisFullScreen] = useState(false);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      resetCode() {
+        setCode('');
+      }
+    }));
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading}>
-        {mode === 'xml' ? 'html' : mode}
+      <div className={styles.header}>
+        <div className={styles.heading}>
+          {mode === 'xml' ? 'html' : mode}
+        </div>
+        <FontAwesomeIcon
+          className={styles.icon}
+          icon={isFullScreen ? faCompressAlt : faExpandAlt}
+          onClick={() => {
+            setisFullScreen(!isFullScreen);
+          }}
+        />
       </div>
       <CodeMirror
         className={styles.editor}
@@ -39,4 +60,6 @@ export default function Editor({ mode, onCodeUpdate }) {
       />
     </div>
   )
-}
+});
+
+export default Editor;

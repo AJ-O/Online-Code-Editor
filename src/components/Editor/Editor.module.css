@@ -2,12 +2,26 @@
   background-color: black;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
 .heading {
   color: hsl(0, 0%, 100%);
   text-transform: uppercase;
-  padding-left: 1rem;
+  text-align: center;
 }
 
 .editor {
   border-radius: 4px;
+}
+
+.icon {
+  color: white;
+}
+
+.icon:hover {
+  cursor: pointer
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './Output.module.css';
 
 export default function Output({ srcDoc }) {
