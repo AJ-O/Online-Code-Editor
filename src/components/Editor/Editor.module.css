@@ -1,0 +1,13 @@
+.wrapper {
+  background-color: black;
+}
+
+.heading {
+  color: hsl(0, 0%, 100%);
+  text-transform: uppercase;
+  padding-left: 1rem;
+}
+
+.editor {
+  border-radius: 4px;
+}
