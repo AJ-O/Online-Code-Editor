@@ -1,5 +1,11 @@
 .wrapper {
   background-color: black;
+  flex-grow: 1;
+}
+
+.wrapper-test {
+  background-color: black;
+  flex-grow: 0;
 }
 
 .header {

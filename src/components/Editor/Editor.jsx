@@ -14,7 +14,7 @@ require('codemirror/mode/css/css');
 const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
 
   const [code, setCode] = useState('');
-  const [isFullScreen, setisFullScreen] = useState(false);
+  const [isFullScreen, setisFullScreen] = useState(true);
 
   useImperativeHandle(
     ref,
@@ -25,7 +25,7 @@ const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
     }));
 
   return (
-    <div className={styles.wrapper}>
+    <div className={isFullScreen ? styles.wrapper : 'wrapper-test'}>
       <div className={styles.header}>
         <div className={styles.heading}>
           {mode === 'xml' ? 'html' : mode}
@@ -36,6 +36,7 @@ const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
           onClick={() => {
             setisFullScreen(!isFullScreen);
           }}
+          data-tool-tip="reset"
         />
       </div>
       <CodeMirror

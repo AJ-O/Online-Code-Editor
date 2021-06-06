@@ -32,8 +32,10 @@
 
 
 .top-pane {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+  display: flex;
+  flex-shrink: 0;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
   background-color: #222;
