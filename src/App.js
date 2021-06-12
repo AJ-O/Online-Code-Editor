@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Editor from './components/Editor/Editor';
 import Output from './components/Output/Output';
@@ -22,7 +22,7 @@ function App() {
       </html>
     `;
 
-  function setCodeTemplate(code, mode) {
+  const setCodeTemplate = (code, mode) => {
     switch (mode) {
       case 'xml':
         setHtmlTemplate(code);
@@ -37,18 +37,48 @@ function App() {
         break;
 
       default:
-        console.log('unknown language specified');
+        alert('Unknown language');
     }
   }
 
-  function resetTemplates() {
+  const setCodeOnReload = () => {
+
+    for (let i = 0; i < localStorage.length; i++) {
+      setCodeTemplate(localStorage.getItem(localStorage.key(i)), localStorage.key(i));
+    }
+    htmlRef.current.setCodeOnReload(localStorage.getItem('xml'));
+    cssRef.current.setCodeOnReload(localStorage.getItem('css'));
+    jsRef.current.setCodeOnReload(localStorage.getItem('javascript'));
+
+  }
+
+  const resetCodeState = () => {
     setHtmlTemplate('');
     setCss('');
     setJsCode('');
+  }
+
+  const resetEditor = () => {
     htmlRef.current.resetCode();
     cssRef.current.resetCode();
     jsRef.current.resetCode();
   }
+
+  const resetLocalStorage = () => {
+    localStorage.removeItem('xml');
+    localStorage.removeItem('css');
+    localStorage.removeItem('javascript');
+  }
+
+  const clearAllCode = () => {
+    resetCodeState();
+    resetEditor();
+    resetLocalStorage();
+  }
+
+  useEffect(() => {
+    setCodeOnReload();
+  }, []);
 
   return (
     <div className="App">
@@ -63,7 +93,7 @@ function App() {
           <FontAwesomeIcon
             className="icon"
             icon={faSyncAlt}
-            onClick={resetTemplates}
+            onClick={clearAllCode}
           />
         </div>
       </div>

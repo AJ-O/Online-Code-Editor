@@ -21,11 +21,18 @@ const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
     () => ({
       resetCode() {
         setCode('');
+      },
+      setCodeOnReload(code) {
+        setCode(code);
       }
     }));
 
+  const setCodeInLocalStorage = (mode, code) => {
+    localStorage.setItem(mode, code);
+  }
+
   return (
-    <div className={isFullScreen ? styles.wrapper : 'wrapper-test'}>
+    <div className={isFullScreen ? styles.wrapper : 'wrapper-min'}>
       <div className={styles.header}>
         <div className={styles.heading}>
           {mode === 'xml' ? 'html' : mode}
@@ -55,6 +62,8 @@ const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
         onChange={(editor, data, value) => {
           const timeout = setTimeout(() => {
             onCodeUpdate(value, mode);
+            setCodeInLocalStorage(mode, code);
+
           }, 2000);
           return () => clearTimeout(timeout);
         }}
