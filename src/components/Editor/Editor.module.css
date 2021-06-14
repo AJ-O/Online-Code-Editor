@@ -1,11 +1,13 @@
 .wrapper {
   background-color: black;
   flex-grow: 1;
+  width: calc(93vw / 3);
 }
 
-.wrapper-min {
+.wrapperMin {
   background-color: black;
   flex-grow: 0;
+  width: 10%;
 }
 
 .header {

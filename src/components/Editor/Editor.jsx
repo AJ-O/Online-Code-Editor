@@ -32,7 +32,7 @@ const Editor = forwardRef(({ mode, onCodeUpdate }, ref) => {
   }
 
   return (
-    <div className={isFullScreen ? styles.wrapper : 'wrapper-min'}>
+    <div className={isFullScreen ? styles.wrapper : styles.wrapperMin}>
       <div className={styles.header}>
         <div className={styles.heading}>
           {mode === 'xml' ? 'html' : mode}

@@ -37,7 +37,7 @@ function App() {
         break;
 
       default:
-        alert('Unknown language');
+        console.log('Unknown language');
     }
   }
 
